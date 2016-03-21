@@ -17,19 +17,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scenery" translatesAutoresizingMaskIntoConstraints="NO" id="f3R-5H-dSg">
-                                <rect key="frame" x="0.0" y="-5" width="319" height="318"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scenery" translatesAutoresizingMaskIntoConstraints="NO" id="f3R-5H-dSg">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulq-OE-qdH">
-                                <rect key="frame" x="93" y="327" width="147" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulq-OE-qdH">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WoW-1D-W6F"/>
+                                </constraints>
                                 <state key="normal" title="Show Filtered Image"/>
+                                <state key="selected" title="Show Before Image"/>
                                 <connections>
                                     <action selector="onImageToggle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JY1-Fn-y6y"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ulq-OE-qdH" secondAttribute="trailing" id="0fV-wx-xQC"/>
+                            <constraint firstItem="f3R-5H-dSg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2IJ-hD-zMo"/>
+                            <constraint firstItem="ulq-OE-qdH" firstAttribute="top" secondItem="f3R-5H-dSg" secondAttribute="bottom" id="Hgt-6f-lKa"/>
+                            <constraint firstItem="f3R-5H-dSg" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="I8M-BP-A8D"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ulq-OE-qdH" secondAttribute="bottom" id="TKO-6N-baV"/>
+                            <constraint firstAttribute="trailing" secondItem="f3R-5H-dSg" secondAttribute="trailing" id="TuV-8i-dHc"/>
+                            <constraint firstItem="ulq-OE-qdH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rdK-KN-cCC"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageToggle" destination="ulq-OE-qdH" id="a4a-kE-MWs"/>
