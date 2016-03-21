@@ -9,12 +9,29 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var filteredImage: UIImage?
 
     @IBOutlet weak var imageView: UIImageView!
+
+    @IBOutlet weak var imageToggle: UIButton!
+
+    @IBAction func onImageToggle(sender: UIButton) {
+        if imageToggle.selected {
+            let image = UIImage(named: "scenery")
+            imageView.image = image
+            imageToggle.selected = false
+        }
+        else {
+            imageView.image = filteredImage
+            imageToggle.selected = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        imageToggle.setTitle("Show Before Image", forState: .Selected)
         
         let image = UIImage(named: "scenery")!
         
@@ -40,10 +57,7 @@ class ViewController: UIViewController {
             }
         }
         
-        let result = rgbaImage.toUIImage()
-        print("This code has executed")
-        //filteredImage = rgbaImage.toUIImage()
-        imageView.image = result
+        filteredImage = rgbaImage.toUIImage()
     }
 
     override func didReceiveMemoryWarning() {
