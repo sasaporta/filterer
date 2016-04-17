@@ -12,51 +12,16 @@ class ViewController: UIViewController {
     
     var filteredImage: UIImage?
 
-    @IBOutlet weak var imageView: UIImageView!
-
-    @IBOutlet weak var imageToggle: UIButton!
-
-    @IBAction func onImageToggle(sender: UIButton) {
-        if imageToggle.selected {
-            let image = UIImage(named: "scenery")
-            imageView.image = image
-            imageToggle.selected = false
-        }
-        else {
-            imageView.image = filteredImage
-            imageToggle.selected = true
-        }
-    }
+    @IBOutlet var imageView: UIImageView!
+    
+    @IBOutlet var secondaryMenu: UIView!
+    @IBOutlet var filterButton: UIButton!
+    @IBOutlet var bottomMenu: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        let image = UIImage(named: "scenery")!
-        
-        let rgbaImage = RGBAImage(image: image)!
-        
-        let avgRed = 107
-        
-        for y in 0..<rgbaImage.height {
-            for x in 0..<rgbaImage.width {
-                let index = y * rgbaImage.width + x
-                
-                var pixel = rgbaImage.pixels[index]
-                
-                let redDelta = Int(pixel.red) - avgRed
-                
-                var modifier = 1 + 4 * (Double(y) / Double(rgbaImage.height))
-                if (Int(pixel.red) < avgRed) {
-                    modifier = 1
-                }
-                
-                pixel.red = UInt8(max(min(255, Int(round(Double(avgRed) + modifier * Double(redDelta)))), 0))
-                rgbaImage.pixels[index] = pixel
-            }
-        }
-        
-        filteredImage = rgbaImage.toUIImage()
+        secondaryMenu.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        secondaryMenu.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +29,30 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func onFilter(sender: UIButton) {
+        if (sender.selected) {
+            hideSecondaryMenu()
+            sender.selected = false
+        } else {
+            showSecondaryMenu()
+            sender.selected = true
+        }
+    }
+    
+    func showSecondaryMenu() {
+        view.addSubview(secondaryMenu)
+        
+        let bottomConstraint = secondaryMenu.bottomAnchor.constraintEqualToAnchor(bottomMenu.topAnchor)
+        let leftConstraint = secondaryMenu.leftAnchor.constraintEqualToAnchor(view.leftAnchor)
+        let rightContraint = secondaryMenu.rightAnchor.constraintEqualToAnchor(view.rightAnchor)
+        let heightConstraint = secondaryMenu.heightAnchor.constraintEqualToConstant(44)
+        
+        NSLayoutConstraint.activateConstraints([bottomConstraint, leftConstraint, rightContraint, heightConstraint])
+        view.layoutIfNeeded()
+    }
+    
+    func hideSecondaryMenu() {
+        secondaryMenu.removeFromSuperview()
+    }
 }
 
